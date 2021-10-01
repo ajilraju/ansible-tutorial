@@ -1,0 +1,10 @@
+---
+- name: restart apache2
+  service:
+    name: apache2
+    state: restarted
+
+- name:
+  file:
+    name: /tmp/hello
+    state: touch

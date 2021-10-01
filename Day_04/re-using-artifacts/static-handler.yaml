@@ -1,0 +1,15 @@
+---
+- hosts: ec2
+  gather_facts: no
+
+  handlers:
+    - name: restart services
+      import_tasks: restarts.yaml # kind of preprocessor
+      vars:
+        user: www-data
+
+  tasks:
+    - name: Valid execution
+      command: /bin/true
+      notify:
+        - stop apache2

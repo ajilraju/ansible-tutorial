@@ -1,0 +1,22 @@
+---
+# Installing package using package manager (apt/yum) based-on
+# the target machine distro(like Debian, Redhat).
+
+- hosts: all
+  gather_facts: yes # By default fact gathering is on, doesn't require this line.
+
+
+  tasks:
+    - name: Installing Apache2 to the latest version(on Debain).
+      apt:
+        name: apache2
+        state: latest
+        update_cache: yes
+      when: ansible_facts['os_family'] == "Debain"
+
+    - name: Installing Apache2 to the latest version(on Redhat).
+      yum:
+        name: httpd
+        state: latest
+        update_cache: yes
+      when: ansible_facts['os_family'] == "Redhat"

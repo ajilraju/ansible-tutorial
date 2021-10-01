@@ -1,0 +1,12 @@
+---
+- hosts: ec2
+  gather_facts: no
+
+  handlers:
+    - name: restart services
+      include_tasks: restarts.yaml
+
+  tasks:
+    - name: Dummy execution
+      command: /bin/true
+      notify: restart services

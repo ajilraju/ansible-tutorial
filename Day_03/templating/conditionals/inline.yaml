@@ -1,0 +1,14 @@
+---
+- hosts: all
+  gather_facts: no
+  connection: local
+
+  vars:
+    uri:
+      scheme: https
+
+  tasks:
+    - name: Testing inline Jinja conditionals
+      debug:
+        msg: "APP URL is {{ 'https://' if uri.scheme == 'https' else 'http://' }}app.example.com"
+        # <do something> if <condition_is_true> [else] <do something>

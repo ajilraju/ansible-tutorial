@@ -1,0 +1,27 @@
+---
+- hosts: server1
+  gather_facts: no
+
+  vars_files:
+    - vars/git.yaml
+    - vars/defaults.yaml
+
+  handlers:
+    - name: restart services
+      include_tasks: handlers/service-restart.yaml
+
+  tasks:
+    - import_tasks: tasks/common/dev-env.yaml
+    - import_tasks: tasks/webserver/webserver.yaml
+
+    - name: configuring Git email
+      git_config:
+        name: user.email
+        scope: global
+        value: "{{ git.email }}"
+
+    - name: configuring Git username
+      git_config:
+        name: user.name
+        scope: global
+        value: "{{ git.user }}"

@@ -1,0 +1,18 @@
+---
+# Copying dummy bind3 config to /tmp directory.
+
+- hosts: all
+  gather_facts: no
+
+  vars:
+    domain_name: example.com
+    serial_number: 2021092601
+    domain_ip: 192.166.117.111
+    mail_domain_name: "mx.{{ domain_name }}"
+    mail_domain_ip: 192.166.117.112
+
+  tasks:
+    - name: Copying dummy bind3 config to /tmp dir (just for test).
+      template: # template is module used for copying the jinja template to remote.
+        src: templates/example.com.j2
+        dest: /tmp/bind-example.com  # remote location.

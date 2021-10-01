@@ -1,0 +1,9 @@
+---
+- hosts: ec2
+  gather_facts: no
+
+  tasks:
+    - name: Command is Failed but it's running.
+      command: /bin/false
+      register: cmd_status
+      failed_when: cmd_status.rc != 1

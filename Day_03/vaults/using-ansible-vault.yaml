@@ -1,0 +1,17 @@
+---
+- hosts: 127.0.0.1
+  connection: local
+  gather_facts: no
+
+  vars:
+    app_location: /tmp/Django-application-configfile
+
+  tasks:
+    - name: Copying Django config files.
+      copy:
+        src: vars/api.conf
+        dest: "{{ app_location }}"
+
+    - name: Starting Django-application.
+      command: echo "python app-bin -c {{ app_location }}"
+

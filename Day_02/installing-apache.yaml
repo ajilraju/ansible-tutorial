@@ -1,0 +1,22 @@
+---
+- hosts: all
+  gathering_facts: no
+
+  tasks:
+  - name: Installing Apache2 to latest
+    apt:
+      name: apache2
+      state: latest
+
+  - name: Copying new index.html file.
+    copy:
+      src: /tmp/index.html
+      dest: /var/www/html/index.html
+    notify:
+      - restart apache2
+
+  handler:
+    - name: restart apache2
+      service:
+        name: apache2
+        state: restarted

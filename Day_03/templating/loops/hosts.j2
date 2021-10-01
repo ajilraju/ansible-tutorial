@@ -1,0 +1,10 @@
+{% for host_item in host_entires %}
+
+{% for domain, ip in host_item.items() %}
+
+{{ ip }} {{ domain }}
+
+{% endfor %}
+
+{% endfor %}
+

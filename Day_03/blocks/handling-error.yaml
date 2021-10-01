@@ -1,0 +1,27 @@
+---
+# Same as the Exception handling.
+
+- hosts: all
+  gather_facts: no
+
+  tasks:
+    block:
+      - name: Listing /root directory.
+        command: ls -l /root
+
+      - name: Listing a directory that doesn't exist.
+        command: ls -l /directory-that-not-here
+
+      - name: Explicit false command.
+        command: /bin/false
+
+    rescue:
+      - name: Rescue block (perform recovery)
+        debug:
+          msg: "Something went wrong, cleaning up.."
+
+    always:
+
+      - name: This will execute always
+        debug:
+          msg: "I will execute even in failure scenario"

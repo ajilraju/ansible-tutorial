@@ -1,0 +1,10 @@
+---
+- name: restart Nginx
+  service:
+    name: nginx
+    state: restarted
+
+- name: stop apache2
+  service:
+    name: apache2
+    state: stopped

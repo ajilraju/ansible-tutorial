@@ -1,0 +1,16 @@
+---
+- hosts: all
+  gather_facts: no
+
+  vars:
+    host_entires:
+      - { google.com: 142.250.182.110 }
+      - { yahoo.com: 74.6.143.25 }
+      - { github.com: 13.234.176.102 }
+      - { nyc.gov: 157.188.12.160 }
+
+  tasks:
+    - name: creating new host entry file.
+      template:
+        src: hosts.j2
+        dest: /tmp/etc/hosts

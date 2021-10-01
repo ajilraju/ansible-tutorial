@@ -1,0 +1,12 @@
+---
+- hosts: all
+  connection: local
+  gather_facts: no
+  
+  vars:
+          feature:
+                  enabled: true
+  tasks:
+    - name: Pause with render
+      pause:
+        prompt: "{{ lookup('template', 'sample.j2') }}"

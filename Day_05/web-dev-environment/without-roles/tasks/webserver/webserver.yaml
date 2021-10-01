@@ -1,0 +1,22 @@
+---
+- name: Installing Apache2 and dependenices
+  apt:
+    name:
+      - apache2
+      - libapache2-mod-php
+
+    state: latest
+  notify:
+    - restart services
+
+
+- name: Installing PHP and dependenices modules.
+  apt:
+    name:
+      - php-cli
+      - php-cgi
+      - php-mysql
+      - php-gd
+      - php-mbstring
+
+    state: latest

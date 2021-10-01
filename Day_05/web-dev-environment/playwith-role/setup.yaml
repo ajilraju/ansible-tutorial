@@ -1,0 +1,20 @@
+---
+- hosts: ec2
+  gather_facts: yes
+
+  roles:
+    - common
+    - webserver
+
+  tasks:
+    - name: configuring Git email
+      git_config:
+        name: user.email
+        scope: global
+        value: "{{ git.email }}"  
+          
+    - name: configuring Git username
+      git_config:
+        name: user.user
+        scope: global
+        value: "{{ git.user }}"

@@ -1,0 +1,14 @@
+---
+
+- hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Analysizing /etc/passwd file.
+      command: cat /etc/passwd
+      register: file_content
+
+    - name: Checking user 'www-data' is present in /etc/passwd file.
+      debug:
+        msg: "user is present"
+      when: file_content.stdout_lines.find('www-data') == 0

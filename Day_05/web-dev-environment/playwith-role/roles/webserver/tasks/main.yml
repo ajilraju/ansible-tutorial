@@ -1,0 +1,28 @@
+---
+- name: Installing Apache2 and dependenices
+  apt:
+    name:
+      - apache2
+      - libapache2-mod-php
+
+    state: latest
+  notify:
+    - restart apache2
+
+- name: Installing PHP and dependenices modules.
+  apt:
+    name:
+      - php-cli
+      - php-cgi
+      - php-mysql
+      - php-gd
+      - php-mbstring
+
+    state: latest
+  notify:
+    - restart apache2
+
+- name: Copying default ansible base webpage.
+  template:
+    src: default-index.html.j2
+    dest: /var/www/html/index.html

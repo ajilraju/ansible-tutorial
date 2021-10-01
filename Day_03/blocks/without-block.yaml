@@ -1,0 +1,19 @@
+---
+- hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Listing /usr directory.
+      command: ls -l /usr
+      become: yes
+      when: ansible_facts['distribution'] == 'CentOS'
+
+    - name: Listing /root directory.
+      command: ls -l /root
+      become: yes
+      when: ansible_facts['distribution'] == 'CentOS'
+
+    - name: Listing /bin directory.
+      command: ls -l /bin
+      become: yes
+      when: ansible_facts['distribution'] == 'CentOS'

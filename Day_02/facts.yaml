@@ -1,0 +1,8 @@
+---
+- name: "Gathering information about the remote machines."
+- hosts: all
+
+  taks:
+    - name: Calling setup module.
+      setup:
+  

@@ -1,0 +1,28 @@
+---
+- hosts: ec2
+  gather_facts: no
+
+  tasks:
+    - name: install funny cli commands
+      apt:
+        name:
+          - cowsay
+          - sl
+        state: latest
+      tags:
+        - funny
+        - clifun
+
+    - name: Checking Apache2 is preset
+      apt:
+        name: apache2
+        state: present
+      tags:
+        - webserver
+
+    - name: Checking Nginx is present
+      apt:
+        name: nginx
+        state: present
+      tags:
+        - webserver

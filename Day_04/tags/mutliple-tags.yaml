@@ -1,0 +1,22 @@
+---
+- hosts: ec2
+  gather_facts: no
+
+  tasks:
+    - name: webserver block
+      tags: webserver
+      block:
+      - name: Checking Apache2 installations
+        apt:
+          name: apache2
+          state: present
+
+      - name: Checking Nginx installations
+        apt:
+          name: nginx
+          state: present
+
+      - name: Stopping Apache2
+        service:
+          name: apache2
+          state: stopped

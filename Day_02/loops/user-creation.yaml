@@ -1,0 +1,30 @@
+---
+# Task #1 creating a single user Tom.
+# Task #2 creating user with specified details.
+# Task #3 creating multiple users(3) with specified details.
+
+- hosts: all
+  gather_facts: no # For increasing speed and doesn't require any info about remote.
+
+  tasks:
+    - name: creating a single user Tom.
+    user:
+      name: Tom
+
+    - name: creating user with specified details.
+      user: 
+        name: Thomas
+        comment: Thomas Tom
+        shell: /bin/bash
+
+    - name: creating multiple users(3) with specified details.
+      user:
+        name: "{{ item.username }}"
+        comment: "{{ item.fullname }}"
+        shell: "{{ item.shell}}"
+
+
+      loop:
+        - {username: Clint, shell: /bin/bash, fullname: Clint Thomas}
+        - {username: Helan, shell: /usr/sbin/nologin, fullname: Helan Tom}
+        - {username: David, shell: /bin/bash, fullname: David Mathew}
