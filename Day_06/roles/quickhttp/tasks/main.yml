@@ -1,0 +1,31 @@
+---
+- name: Create web user.
+  user:
+    name: "{{ web_user }}"
+
+- name: Create www directory.
+  file:
+    path: "{{ www_dir }}"
+    state: directory
+    owner: "{{ web_user }}"
+
+- name: Install quickhttp systemd service.
+  template:
+    src: quickhttp.service
+    dest: /etc/systemd/system/
+
+- name: Start and enabling quickhttp service on boot.
+  systemd:
+    name: quickhttp
+    daemon_reload: yes
+    state: started
+    enabled: yes
+
+- name: Copy files to serve.
+  copy:
+    src: "{{ item }}"
+    dest: "{{ www_dir }}"
+    owner: "{{ web_user }}"
+    group: "{{ web_group }}"
+    mode: 0660
+  loop: "{{ www_files }}"

@@ -1,0 +1,19 @@
+galaxy_info:
+  role_name: quickhttp
+  author: Ajil Raju
+  description: Role to setup a quick and simple HTTP server
+
+  license: GNU GPLv3
+
+  min_ansible_version: 2.9
+
+
+  platforms:
+    - name: debian 
+      versions:
+        - focal
+
+  galaxy_tags: [simplehttp, quickhttp, http, python]
+
+dependencies: []
+  
