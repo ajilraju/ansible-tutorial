@@ -5,7 +5,7 @@ Documentation=https://docs.python.org/3/library/http.server.html
 [Service]
 User={{ web_user }}
 WorkingDirectory={{ www_dir }}
-ExecStart=/usr/bin/python3 -m http.server --bind 127.0.0.1 8080
+ExecStart=/usr/bin/python3 -m http.server 8080
 ExecStop=/bin/kill $(/bin/ps -aux | /usr/bin/grep http.server | /usr/bin/grep -v grep | /usr/bin/awk '{print $2}')
 
 [Install]

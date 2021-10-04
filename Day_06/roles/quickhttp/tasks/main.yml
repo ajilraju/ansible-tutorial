@@ -7,12 +7,14 @@
   file:
     path: "{{ www_dir }}"
     state: directory
+    mode: 0777
     owner: "{{ web_user }}"
 
 - name: Install quickhttp systemd service.
   template:
     src: quickhttp.service
     dest: /etc/systemd/system/
+    mode: 0644
 
 - name: Start and enabling quickhttp service on boot.
   systemd:
