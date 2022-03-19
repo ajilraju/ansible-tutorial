@@ -1,0 +1,21 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: "Disk resource details"
+      command: df -h
+      register: details
+
+    - name: "Variations"
+      command: free
+
+    - name: "Details of server"
+      debug:
+        msg: "{{ details.stdout_lines }}"
+
+    - name: Creating a file.
+      file:
+        path: /tmp/ansible_created_file
+        state: touch
+        mode: '1777'
+      
