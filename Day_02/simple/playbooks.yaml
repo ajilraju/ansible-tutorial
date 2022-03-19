@@ -1,0 +1,17 @@
+---
+- name: Simple ansible playbooks examples
+  hosts: all
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: Adding a user
+      ansible.builtin.user:
+        name: james
+        shell: /bin/bash
+        password: "{{ 'demo_pass' | password_hash('sha512') }}"
+
+    - name: Copying file into James home dir
+      ansible.builtin.copy:
+        src: ./demo.txt
+        dest: /home/james/
+        mode: 0744

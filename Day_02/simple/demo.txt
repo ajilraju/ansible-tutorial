@@ -1,0 +1,8 @@
+Linux Pluggable Authentication 
+Modules is a suite of libraries
+that allows a Linux system administrator
+to configure methods to authenticate users.
+It provides a flexible and centralized way
+to switch authentication methods for
+secured applications by using configuration
+files instead of changing application code.
