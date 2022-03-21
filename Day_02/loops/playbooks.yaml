@@ -1,0 +1,37 @@
+---
+- hosts: all
+  become: true
+  gather_facts: no
+
+  vars:
+    file_prefix:
+      - linux
+      - windows
+      - mac
+      - solaris
+
+  tasks:
+    - name: Creating files
+      file:
+        dest: "{{ item }}-notes.txt"
+        state: touch
+      loop: "{{ file_prefix }}"
+
+    - name: Adding users
+      user:
+        name: "{{ item.name }}"
+        shell: "{{ item.shell }}"
+      loop:
+        - {name: kelvin, shell: /usr/bin/bash}
+        - {name: dee, shell: /usr/sbin/nologin}
+        - {name: alvin, shell: /usr/bin/bash}
+
+    - name: user database
+      command: cat /etc/passwd
+      register: user_db
+
+    - name: listing available users
+      debug: 
+        msg: "{{ item }}"
+      when: user_db.rc == 0
+      loop: "{{ user_db.stdout_lines }}"
