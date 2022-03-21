@@ -1,0 +1,12 @@
+---
+- hosts: all
+  become: true
+  gather_facts: false
+  tasks:
+    - name: Checking uptime
+      ansible.builtin.shell: uptime
+      register: uptime
+
+    - name: Displaying uptime
+      ansible.builtin.debug:
+        var: uptime.stdout
