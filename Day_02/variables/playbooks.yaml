@@ -1,0 +1,40 @@
+---
+- hosts: all
+  become: true
+  gather_facts: false
+
+  vars:
+    my_vars: Ansible
+    my_int: 1
+    file_path: ansible-novel.txt
+
+    my_group_vars:
+      - apple
+      - Apache
+  
+  vars_files:
+    - "variables.yaml"
+    # - "service_{{ ansible_os_family }}.yaml"
+
+
+  tasks:
+    - name: Single variable
+      debug:
+        msg: "'{{ my_vars }}' is very good."
+
+    - name: Accessing inventory variable
+      debug:
+        msg: "{{ inv_vars }}"
+
+    - name: Group vars
+      debug:
+        msg: "{{ my_group_vars[0] }}"
+
+    - name: From file dict vars
+      debug:
+        msg: "{{ my_group_vars_file['first'] }}"
+
+    - name: Creating file
+      copy:
+        dest: "/tmp/{{ file_path }}"
+        content: "{{ novel }}"

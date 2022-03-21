@@ -1,0 +1,13 @@
+my_f_vars: Ansible
+my_f_int: 1
+
+my_group_vars_file:
+  first: My first variable
+  second: My second variable
+
+novel: >
+  Ansible was founded to provide a new way 
+  to think about managing systems and applications 
+  that better fit this new world. Historically, 
+  management vendors and home-grown scripting solutions 
+  were created to manage stacks of software on servers.
