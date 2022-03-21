@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: true
+  gather_facts: false
+  tasks:
+    - name: Uptime checking
+      shell: uptime
+
+  pre_tasks:
+    - name: Who is logged in
+      command: who
