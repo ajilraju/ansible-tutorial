@@ -1,0 +1,34 @@
+---
+- hosts: all
+  become: true
+
+  vars:
+    proceed: True
+
+  tasks:
+    - name: Conditionals simple demo
+      debug:
+      when: proceed
+
+    - name: Installing Nginx.
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+        update_cache: true
+      when: ansible_os_family == "Debian"
+
+    - name: Checking release notes
+      command: cat /etc/os-release
+      register: release
+
+    - name: Display release version
+      debug:
+        msg: "It's Focal.........!!!"
+      when: release.stdout.find('Focal') != -1
+
+    - name: Checking I have powers
+      debug:
+        msg: "Have some powers"
+      when: ansible_facts['system_capabilities_enforced'] and ansible_facts['apparmor']['status'] == "enabled "
+
+    
