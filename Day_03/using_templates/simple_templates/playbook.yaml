@@ -1,0 +1,26 @@
+---
+- hosts: all
+  become: true
+  gather_facts: true
+
+  vars_files:
+    - vars/http.yaml
+
+  tasks:
+    - name: Copying index.html file.
+      ansible.builtin.template:
+        src: index.html.j2
+        dest: /usr/share/nginx/html/index.html
+        mode: 0644
+
+    - name: Making optional
+      ansible.builtin.file:
+        dest: "{{ item.path }}"
+        #mode: "{{ item.mode }}"
+        mode: "{{ item.mode | default(omit) }}"
+        state: touch
+      loop:
+        - path: /tmp/hello-1
+        - path: /tmp/hello-2
+        - path: /tmp/hello-3
+          mode: 777

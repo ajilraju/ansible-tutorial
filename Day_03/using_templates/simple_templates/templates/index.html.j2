@@ -1,0 +1,29 @@
+<html>
+<head>
+    <title>Welcome to Ansible</title>
+    <style>
+        i {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h3>Current date and time is {{ now() }}</h3>
+
+    <h3>Current maintainer is <i>{{ maintainer | default("DevOps team") }}</i></h3>
+    <h3>Current maintainer is <i>{{ maintainer.upper() | default("DevOps team") }}</i></h3>
+    <h3>List of operating systems</h3>
+    <ul>
+    {% for os in OS %}
+        <li>{{ os }}</i>
+    {% endfor %}
+    </ul>
+
+    <h3>Distro info</h3>
+    {% if ansible_os_family == "Debian" %}
+        <a href="https://www.debian.org/">Visit Debian</a>
+    {% else %}
+        <a href="https://en.wikipedia.org/wiki/List_of_Linux_distributions">Find your Distro</a>
+    {% endif %}
+</body>
+</html>

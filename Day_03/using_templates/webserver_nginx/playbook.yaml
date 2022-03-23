@@ -1,0 +1,39 @@
+---
+- name: Configuring Webserver with Nginx.
+  hosts: all
+  become: true
+  gather_facts: false
+
+  vars_files:
+    - vars/http.yaml
+
+  tasks:
+    - name: Installing Nginx.
+      ansible.builtin.apt:
+        name: nginx
+        update_cache: true
+        state: present
+
+    - name: Copying Nginx Configuration file.
+      ansible.builtin.template:
+        src: nginx.conf.j2
+        dest: /etc/nginx/sites-available/default
+        mode: 0644
+
+    - name: Enable Configuration
+      ansible.builtin.file:
+        dest: /etc/nginx/sites-enabled/default
+        src: /etc/nginx/sites-available/default
+        state: link
+        mode: 0644
+
+    - name: Copying index.html file.
+      ansible.builtin.template:
+        src: index.html.j2
+        dest: /usr/share/nginx/html/index.html
+        mode: 0644
+
+    - name: Restart Nginx
+      ansible.builtin.service:
+        name: nginx
+        state: restarted
