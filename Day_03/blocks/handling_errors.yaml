@@ -1,0 +1,25 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: Handling errors
+      block:
+        - name: Great command
+          ansible.builtin.debug:
+            msg: "I'm executed."
+
+        - name: Raising False
+          ansible.builtin.command: /bin/false
+
+        - name: True command
+          ansible.builtin.command: /bin/true
+
+      rescue:
+        - name: Print when errors
+          ansible.builtin.debug:
+            msg: 'I caught an error, can do stuff here to fix it, :-)'
+
+      always:
+        - name: Always do this
+          ansible.builtin.debug:
+            msg: "This always executes, :-)"
