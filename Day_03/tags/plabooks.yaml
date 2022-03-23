@@ -1,0 +1,31 @@
+---
+- hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Installing Nginx
+      ansible.builtin.debug:
+        msg: "Installing NTP"
+      tags: ntp
+
+    - name: Installing Redis
+      ansible.builtin.debug:
+        msg: "Configuring NTP"
+      tags: ntp
+
+    - name: Instaling cowsay
+      ansible.builtin.debug:
+        msg: "Installing Cowsay"
+      tags: fun
+
+    - name: block level tags
+      block:
+        - name: Block example 1
+          ansible.builtin.debug:
+            msg: "Block 1"
+
+        - name: Block example 2
+          ansible.builtin.debug:
+            msg: "Block 2"
+      tags: block-tags
+
