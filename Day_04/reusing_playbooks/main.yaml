@@ -1,0 +1,12 @@
+---
+- hosts: all
+  gather_facts: false
+  become: true
+  tasks:
+    - name: From main plabook
+      ansible.builtin.debug:
+
+- name: Importing plabook
+  ansible.builtin.import_playbook: webserver.yaml
+  vars:
+    external_variable: WWW-DATA

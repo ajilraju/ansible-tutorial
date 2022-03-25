@@ -1,0 +1,15 @@
+---
+- hosts: all
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Installing Nginx webserver
+      ansible.builtin.apt:
+        name: nginx
+        update_cache: true
+        state: present
+
+    - name: Debug variable usages
+      ansible.builtin.debug:
+        msg: "Value is {{ external_variable }}"
