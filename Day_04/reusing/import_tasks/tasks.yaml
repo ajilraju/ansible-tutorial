@@ -1,0 +1,8 @@
+---
+- name: Hello world
+  ansible.builtin.debug:
+
+- name: Copying file
+  copy:
+    dest: /tmp/new-file.Importing
+    content: "new file content"
