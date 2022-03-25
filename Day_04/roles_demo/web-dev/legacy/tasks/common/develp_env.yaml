@@ -1,0 +1,11 @@
+---
+- name: Installing necessary packages.
+  apt:
+    name:
+      - python3-apt
+      - git
+      - curl
+      - wget
+      
+    update_cache: yes
+    state: latest
