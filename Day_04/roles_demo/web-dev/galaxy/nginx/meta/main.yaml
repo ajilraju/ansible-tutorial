@@ -1,0 +1,15 @@
+galaxy_info:
+  role_name: nginx
+  author: Ajil Raju
+  description: Demo Nginx webserver simple roles.
+
+  license:
+    - CC-BY
+
+  min_ansible_version: 1.2
+
+ 
+  galaxy_tags: [nginx, linux, webserver, server]
+
+
+dependencies: []
