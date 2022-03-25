@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become: true
+  gather_facts: false
+
+  handlers:
+    - name: Restart service
+      include_tasks: handlers.yaml
+
+  tasks:
+    - name: demo command
+      ansible.builtin.command: /bin/true
+      notify: Restart service
