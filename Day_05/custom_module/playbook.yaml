@@ -1,0 +1,22 @@
+---
+- hosts: all
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Testing custom module.
+      hello_module:
+      register: outputs
+
+    - name: printing custom module outputs
+      ansible.builtin.debug:
+        msg: "{{ outputs }}"
+
+    - name: checking another module
+      user_id:
+        name: root
+      register: u_id
+
+    - name: Printing uid of user
+      ansible.builtin.debug:
+        msg: "{{ u_id }}"
