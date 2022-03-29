@@ -1,0 +1,16 @@
+---
+- hosts: all
+  become: true
+  gather_facts: false
+
+  vars_prompt:
+    - name: password
+      prompt: Enter your password?
+      private: true
+
+  tasks:
+    - name: Creating user
+      ansible.builtin.user:
+        name: redwall
+        password: "{{ password }}"
+        shell: /bin/bash
