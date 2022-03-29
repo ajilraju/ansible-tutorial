@@ -1,0 +1,13 @@
+---
+- hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Long running command
+      ansible.builtin.command: sleep 10
+      async: 9
+      poll: 0
+      register: out
+
+    - name: checking uptime
+      ansible.builtin.command: uptime
