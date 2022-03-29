@@ -1,0 +1,25 @@
+---
+- hosts: all
+  gather_facts: false
+
+  vars:
+    texts: &file_content |
+      Anchors and aliases also let you share complex sets of variable values,
+      including nested variables. If you have one variable value that includes
+      another variable value, you can define them separately.
+
+  tasks:
+    - name: creating files with loop
+      ansible.builtin.copy:
+        dest: "{{ item }}"
+        content: *file_content
+        mode: 0444
+      loop:
+        - /tmp/file1
+        - /tmp/file2
+
+    - name: creating file
+      ansible.builtin.copy:
+        dest: /tmp/second_file
+        content: *file_content
+        mode: 0444
