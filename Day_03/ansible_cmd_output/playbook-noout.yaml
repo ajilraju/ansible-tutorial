@@ -1,0 +1,9 @@
+---
+- 
+  hosts: all
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: "Getting file system disk space usage"
+      ansible.builtin.command: df -h

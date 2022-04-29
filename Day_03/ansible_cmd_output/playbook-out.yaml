@@ -1,0 +1,18 @@
+---
+- 
+  hosts: all
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Getting file system disk space usage
+      ansible.builtin.command: df -h
+      register: disk_usage
+    
+    - name: Reporting disk space usage
+      ansible.builtin.debug:
+        var: disk_usage
+    
+    - name: Reporting disk space usage (reduced)
+      ansible.builtin.debug:
+        var: disk_usage.stdout_lines
