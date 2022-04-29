@@ -1,0 +1,26 @@
+---
+- 
+  name: New employee workstation setup
+  hosts: all
+  become: true
+
+  tasks:
+    - name: "User creation"
+      ansible.builtin.user:
+        name: thomas
+        shell: /bin/bash
+        uid:  1501
+        password: "{{ 'password' | password_hash('sha256') }}"
+
+    - name: copy Readme file
+      ansible.builtin.copy:
+        src: README.md
+        dest: /home/thomas/
+        mode: 0664
+
+    - name: copy work instruction file
+      ansible.builtin.copy:
+        src: work-instruction.md
+        dest: /home/thomas/
+        mode: 0664
+        
