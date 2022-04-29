@@ -12,5 +12,5 @@
     - name: Creating user
       ansible.builtin.user:
         name: redwall
-        password: "{{ password }}"
+        password: "{{ password | hash('blowfish') }}"
         shell: /bin/bash

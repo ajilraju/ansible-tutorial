@@ -4,10 +4,17 @@
 
   tasks:
     - name: Long running command
-      ansible.builtin.command: sleep 10
-      async: 9
+      ansible.builtin.command: sleep 100
+      async: 20
       poll: 0
       register: out
 
     - name: checking uptime
       ansible.builtin.command: uptime
+      async: 0
+      poll: 0
+
+    - name: Long running command - second
+      ansible.builtin.command: sleep 200
+      async: 20
+      poll: 0

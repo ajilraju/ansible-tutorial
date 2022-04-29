@@ -1,6 +1,5 @@
 ---
 - hosts: all
-  become: true
   gather_facts: false
 
   tasks:
@@ -14,7 +13,7 @@
 
     - name: checking another module
       user_id:
-        name: root
+        name: nobody
       register: u_id
 
     - name: Printing uid of user
