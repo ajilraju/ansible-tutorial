@@ -1,0 +1,25 @@
+---
+- hosts: all
+  become: true
+  gather_facts: false
+
+  roles:
+    - php
+    - apache2
+
+  tasks:
+    - name: making wordpress host directory
+      ansible.builtin.file:
+        dest: /srv/www/
+        owner: www-data
+        group: www-data
+        mode: 0755
+        state: directory
+
+    - name: Downloading wordpress
+      ansible.builtin.unarchive:
+        src: https://wordpress.org/latest.tar.gz
+        dest: /srv/www/
+        owner: www-data
+        group: www-data
+        remote_src: true

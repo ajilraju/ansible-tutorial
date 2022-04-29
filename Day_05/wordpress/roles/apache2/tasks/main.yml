@@ -1,0 +1,25 @@
+---
+- name: Installing Apache2 and it dependencies
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    update_cache: true
+    state: present
+  loop: "{{ apache_n_dependencies }}"
+
+- name: copying Apache2 configuration
+  ansible.builtin.template:
+    src: wordpress.conf.j2
+    dest: /etc/apache2/sites-available/wordpress.conf
+    mode: 0644
+
+- name: post configuration
+  block:
+    - name: Enabling new vhost configuration
+      ansible.builtin.command: a2ensite wordpress
+
+    - name: Enable URL rewriting
+      ansible.builtin.command: a2enmod rewrite
+
+    - name: Disable the default vhost
+      ansible.builtin.command: a2dissite 000-default
+  notify: restart apache2

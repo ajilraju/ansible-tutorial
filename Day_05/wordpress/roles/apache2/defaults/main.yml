@@ -1,0 +1,6 @@
+---
+apache_n_dependencies:
+  - libapache2-mod-php
+  - apache2
+
+site_location: /srv/www/wordpress
