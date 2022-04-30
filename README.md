@@ -1,1 +1,1 @@
-# ansible sessions for 3r batch examples.
+# ansible sessions for 3rd batch examples.
