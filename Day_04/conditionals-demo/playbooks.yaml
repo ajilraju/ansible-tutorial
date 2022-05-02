@@ -1,0 +1,21 @@
+---
+- hosts: all
+  tasks:
+    - name: Checking Distribution
+      ansible.builtin.debug:
+        msg: "From Ubuntu like distro"
+      when: ansible_os_family != 'Debian'
+
+    - name: Installing minikube
+      ansible.builtin.apt:
+        name:
+          - docker.io
+          - minikube
+      when: ansible_memtotal_mb >= 2000
+
+    - name: Installing minikube again
+      ansible.builtin.apt:
+        name:
+          - docker.io
+          - minikube
+      when: ansible_memtotal_mb >= 2000 and ansible_processor_count >= 2
