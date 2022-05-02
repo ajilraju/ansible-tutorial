@@ -1,0 +1,41 @@
+---
+- 
+  hosts: all
+  become: true
+  gather_facts: false
+
+  vars:
+    # Ansible playbooks level simple variables
+    config_dest: /etc/apache2/sites-enabled/000-default.conf 
+    web_dest: /var/www/html
+
+  tasks:
+    - name: "Installing apache2 webserver"
+      ansible.builtin.apt:
+        name: apache2
+        state: present
+        update_cache: yes
+
+    - name: Copy apache2 configuration file
+      ansible.builtin.copy:
+        src: apache2.conf
+        dest: "{{ config_dest }}" # referencing simple variable
+      notify: Restart apache2     # Jinja2 syntax to reference it
+
+    - name: Enable the Apache2 module rewrite
+      community.general.apache2_module:
+        state: present
+        name: rewrite
+      notify: Restart apache2
+
+    - name: Copy index.html file
+      ansible.builtin.copy:
+        src: index.html
+        dest: "{{ web_dest }}" # referencing simple variable
+        mode: 0664
+  
+  handlers:
+    - name: Restart apache2
+      ansible.builtin.service:
+        name: apache2
+        state: restarted
