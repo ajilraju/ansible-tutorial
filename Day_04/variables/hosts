@@ -1,0 +1,2 @@
+[ec2]
+ec2-instance ansible_host=3.142.145.171 ansible_port=22 ansible_user=ubuntu ansible_ssh_private_key_file=/home/ajil/Music/keys/sharon.pem devops_port=3243 purpose=devops-training
