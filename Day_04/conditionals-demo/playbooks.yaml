@@ -19,3 +19,12 @@
           - docker.io
           - minikube
       when: ansible_memtotal_mb >= 2000 and ansible_processor_count >= 2
+
+    - name: Checking users list
+      ansible.builtin.command: cat /etc/passwd
+      register: users
+
+    - name: Checking user is present
+      ansible.builtin.debug:
+        msg: "Thomas is already exist"
+      when: users.stdout.find('thomas') != -1
