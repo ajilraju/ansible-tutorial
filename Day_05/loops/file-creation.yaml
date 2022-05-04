@@ -1,0 +1,42 @@
+---
+- hosts: all
+  gather_facts: false
+  vars:
+    file_content: >
+      Donec volutpat at ante ac facilisis.Suspendisse
+      libero quam, vulputate ac eleifend ut, aliquet
+      ut massa. Sed semper, elit ac aliquam gravida,
+      risus magna finibus nunc, vitae lacinia arcu.
+
+    list_of_files:
+      - dummy
+      - demo
+
+  tasks:
+    - name: creating file1
+      ansible.builtin.copy:
+        dest: /tmp/file1
+        content: "{{ file_content }}"
+        mode: 0665
+
+    - name: creating file2
+      ansible.builtin.copy:
+        dest: /tmp/file2
+        content: "{{ file_content }}"
+        mode: 0666
+
+    - name: creating file-loop1, file-loop2
+      ansible.builtin.copy:
+        dest: "/tmp/file-{{ item }}"
+        content: "{{ file_content }}"
+        mode: 0666
+      loop:
+        - loop1
+        - loop2
+
+    - name: creating files once more
+      ansible.builtin.copy:
+        dest: "{{ item }}"
+        content: "{{ file_content }}"
+        mode: 0655
+      loop: "{{ list_of_files }}"

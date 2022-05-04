@@ -1,0 +1,34 @@
+---
+- hosts: all
+  become: true
+  gather_facts: false
+
+  vars:
+    users_list:
+      - name: lion
+        shell: /bin/bash
+
+      - name: sloth
+        shell: /usr/sbin/nologin
+
+      - name: potoo
+        shell: /usr/sbin/nologin
+        comment: watcher
+
+  tasks:
+    - name: create users
+      ansible.builtin.user:
+        name: "{{ item.name }}"
+        shell: "{{ item.shell }}"
+        comment: "{{ item.comment | default(omit)}}"
+      loop: "{{ users_list }}"
+
+    - name: loop over dictionary
+      ansible.builtin.debug:
+        msg: "{{ item.key }} -> {{ item.value }}"
+      loop: "{{ tag_data | dict2items }}"
+      vars:
+        tag_data:
+          Env: prod
+          Apps: Gateway
+          Type: microservice
