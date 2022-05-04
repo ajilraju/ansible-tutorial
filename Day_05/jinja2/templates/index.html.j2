@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Jinja2</title>
+    </head>
+    <body>
+        <h1>{{ heading }}</h1>
+        <h2>My shopping list</h2>
+        <ol>
+            <li>{{ fruits.f1 }}</li>
+            <li>{{ fruits.f2 }}</li>
+            <li>{{ fruits.f3 }}</li>
+        </ol>
+        <h2>My shopping list(Jinja2 helped)</h2>
+        <ol>
+            {% for f in fruits2 %}
+            <li>{{ f.capitalize() }}</li>
+            {% endfor %}
+        </ol>
+        {% if 'apple' in fruits2 %}
+        <img src="https://cdn.britannica.com/60/5760-004-FDD0E2AB/Apples.jpg" width="330" height="250">
+        {% endif %}
+    </body>
+</html>
