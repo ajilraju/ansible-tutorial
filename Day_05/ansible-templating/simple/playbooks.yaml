@@ -1,0 +1,24 @@
+---
+- hosts: all
+  gather_facts: false
+
+  vars:
+    greetings: Hola
+    must: false
+    myvar:
+      skills:
+        - ansible
+        - terraform
+    lists:
+      - 2
+      - 4
+      - 8
+      - 8
+      - 8
+
+  tasks:
+    - name: Rendering template
+      ansible.builtin.template:
+        src: templates/generic.j2
+        dest: /tmp/rendered
+        mode: 0644
