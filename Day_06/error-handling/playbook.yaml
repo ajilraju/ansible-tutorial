@@ -1,0 +1,20 @@
+---
+- hosts: all
+  gather_facts: false
+
+  ignore_unreachable: yes
+
+  tasks:
+    - name: Forcing errors
+      ansible.builtin.command: /bin/false
+      ignore_errors: true
+
+    - name: Defining failure
+      ansible.builtin.command: /bin/false
+      register: command
+      failed_when: command.rc != 1
+
+    - name: changing state
+      ansible.builtin.command: ls -l
+      register: cmd
+      changed_when: cmd.rc != 0
