@@ -1,0 +1,18 @@
+---
+- hosts: all
+  gather_facts: false
+  ignore_unreachable: yes
+
+  vars:
+    file_contents: "{{ lookup('file', 'long-file.txt') }}"
+
+  tasks:
+    - name: Create big file
+      ansible.builtin.copy:
+        dest: /tmp/huge-file.txt
+        content: "{{ file_contents }}"
+        mode: 0664
+
+    - name: Create a list
+      ansible.builtin.debug:
+        msg: "{{ lookup('url', 'https://api.github.com/') }}"
