@@ -1,0 +1,11 @@
+---
+- hosts: all
+  gather_facts: false
+
+  vars_files:
+    - password.yaml
+
+  tasks:
+    - name: debug
+      ansible.builtin.debug:
+        msg: "{{ user_passwd }}"
