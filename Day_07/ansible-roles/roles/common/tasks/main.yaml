@@ -1,0 +1,19 @@
+---
+- name: Installing apache2
+  ansible.builtin.apt:
+    name: apache2
+    state: present
+    update_cache: true
+
+- name: copying index.html files
+  ansible.builtin.template:
+    src: index.html.j2
+    dest: /var/www/html/index.html
+    mode: 0644
+  notify: Restart apache
+
+- name: copying simple files
+  ansible.builtin.copy:
+    src: demo.txt
+    dest: /opt
+    mode: 0666
