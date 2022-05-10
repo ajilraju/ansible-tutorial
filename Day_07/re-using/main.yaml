@@ -1,3 +1,6 @@
 ---
 - ansible.builtin.import_playbook:
-    need-to-import.yaml
+    playbooks/need-to-import.yaml
+- ansible.builtin.import_playbook:
+    playbooks/db.yaml
+
