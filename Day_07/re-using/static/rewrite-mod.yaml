@@ -1,0 +1,4 @@
+---
+- name: Enabling Rewrite module
+  ansible.builtin.command: a2enmod rewrite
+  changed_when: true

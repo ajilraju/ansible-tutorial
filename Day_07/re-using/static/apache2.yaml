@@ -1,0 +1,13 @@
+---
+- name: Installing apache webserver
+  ansible.builtin.apt:
+    name: apache2
+    state: "{{ state }}"
+    update_cache: yes
+  when: ansible_facts['distribution'] == 'Ubuntu'
+
+- name: Installing apache webserver
+  ansible.builtin.yum:
+    name: httpd
+    state: present
+  when: ansible_facts['distribution'] == 'CentOS'

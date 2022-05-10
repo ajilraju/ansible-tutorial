@@ -1,0 +1,10 @@
+---
+- hosts: all
+  become: true
+
+  tasks:
+    - ansible.builtin.import_tasks: apache2.yaml
+      vars:
+        state: present
+
+    - ansible.builtin.import_tasks: rewrite-mod.yaml
