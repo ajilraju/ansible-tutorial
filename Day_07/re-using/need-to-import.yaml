@@ -1,0 +1,11 @@
+---
+- hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Demo tasks
+      ansible.builtin.command: ls -la
+      changed_when: true
+
+    - name: Demo tasks 2
+      ansible.builtin.debug:
