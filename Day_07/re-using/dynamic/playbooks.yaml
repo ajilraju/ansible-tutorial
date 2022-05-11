@@ -4,7 +4,7 @@
   gather_facts: false
 
   handlers:
-    - name: Restart apache
+    - name: Restart service
       include_tasks: handlers.yaml
 
   tasks:
@@ -13,14 +13,16 @@
         name: apt
         state: present
         update_cache: true
-      notify: Restart apache
+      changed_when: true
+      notify: Restart service
 
     - name: Installing redis server
       ansible.builtin.apt:
         name: redis-server
         state: present
         update_cache: true
-      notify: Restart web services
+      changed_when: true
+      notify: Restart service
 
     - name: More files
       ansible.builtin.include_tasks: files.yaml
