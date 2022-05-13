@@ -1,0 +1,22 @@
+---
+- hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Long running task - 1
+      ansible.builtin.command: sleep 5
+      changed_when: false
+      async: 6
+      poll: 0 #Fire and Forget 
+
+    - name: Long running task - 1
+      ansible.builtin.command: sleep 5
+      changed_when: false
+      async: 6
+      poll: 0
+
+    - name: Long running task - 1
+      ansible.builtin.command: sleep 5
+      changed_when: false
+      async: 6
+      poll: 0
