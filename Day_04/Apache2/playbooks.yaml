@@ -1,0 +1,19 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: Installing Apache2 webserver
+      ansible.builtin.apt:
+        name: apache2
+        state: present
+        update_cache: true
+
+    - name: Copying virtual host configuration
+      ansible.builtin.copy:
+        src: v_hosts.conf
+        dest: /etc/apache2/sites-enabled/000-default.conf
+
+    - name: Copying webpage - index.html
+      ansible.builtin.copy:
+        src: index.html
+        dest: /var/www/html/index.html
