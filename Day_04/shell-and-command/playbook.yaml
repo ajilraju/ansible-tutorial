@@ -1,0 +1,11 @@
+---
+- hosts: all
+  tasks:
+    - name: Finding uptime
+      ansible.builtin.command: uptime
+
+    - name: Finding users
+      ansible.builtin.command: cat /etc/passwd
+
+    - name: more like shell
+      ansible.builtin.shell: 'w > /tmp/w-output'
