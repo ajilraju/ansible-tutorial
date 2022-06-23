@@ -1,0 +1,22 @@
+[
+    {
+        "hosts": "all",
+        "tasks": [
+            {
+                "name": "Name of the first task",
+                "module1": {
+                    "paramter1": "value",
+                    "paramter2": "value",
+                    "paramter3": "value"
+                }
+            },
+            {
+                "name": "Name of the second task",
+                "module2": {
+                    "paramter1": "value",
+                    "paramter2": "value"
+                }
+            }
+        ]
+    }
+]
