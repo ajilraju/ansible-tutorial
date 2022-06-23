@@ -4,19 +4,19 @@
 
   tasks:
     - name: Long running task - 1
-      ansible.builtin.command: sleep 5
+      ansible.builtin.command: sleep 15
       changed_when: false
-      async: 6
-      poll: 0 #Fire and Forget 
+      async: 16
+      poll: 0 # Fire and Forget 
 
     - name: Long running task - 1
-      ansible.builtin.command: sleep 5
+      ansible.builtin.command: sleep 15
       changed_when: false
-      async: 6
-      poll: 0
+      async: 16
+      poll: 10
 
     - name: Long running task - 1
-      ansible.builtin.command: sleep 5
+      ansible.builtin.command: sleep 15
       changed_when: false
-      async: 6
+      async: 16
       poll: 0

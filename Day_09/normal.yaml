@@ -4,8 +4,10 @@
 
   tasks:
     - name: Long running task - 1
-      ansible.builtin.command: sleep 5
+      ansible.builtin.command: sleep 100
       changed_when: false
+      async: 100
+      poll: 0
 
     - name: Long running task - 1
       ansible.builtin.command: sleep 5
