@@ -6,9 +6,9 @@
       ansible.builtin.command: w
 
     - name: Getting current logged users - second
-      ansible.builtin.command: w
+      ansible.builtin.command: cat /etc/passwd
       register: active_users
 
     - name: printing active users
       ansible.builtin.debug:
-        var: active_users.stdout_lines
+        var: active_users.stdout_lines[0]

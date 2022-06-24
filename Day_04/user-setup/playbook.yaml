@@ -2,6 +2,8 @@
 - name: User setup
   hosts: all
   become: true
+  gather_facts: false
+
   tasks:
     - name: User creation
       ansible.builtin.user:
@@ -13,6 +15,8 @@
 
     - name: Copying README
       ansible.builtin.copy:
+        owner: kevin
+        group: kevin
         src: README
         dest: /home/kevin/
         mode: 0440
