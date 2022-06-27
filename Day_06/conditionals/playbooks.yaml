@@ -1,0 +1,32 @@
+---
+- hosts: all
+  become: true
+
+  vars_files:
+    - "{{ ansible_facts['distribution'] }}.yaml"
+  tasks:
+    - name: Installing webserver
+      ansible.builtin.apt:
+        name: "{{ package_name }}"
+        state: present
+        update_cache: true
+      when: ansible_facts['distribution'] == "Debian"
+
+    - name: Copying virtual host configuration
+      ansible.builtin.copy:
+        src: v_hosts.conf
+        dest: "{{ http_config }}"
+        mode: 0644
+      notify: Restarted Apache2
+
+    - name: Copying webpage - index.html
+      ansible.builtin.copy:
+        src: index.html
+        dest: "{{ doc_root }}"
+        mode: 0444
+
+  handlers:
+    - name: Restarted Apache2
+      ansible.builtin.service:
+        name: apache2
+        state: restarted
