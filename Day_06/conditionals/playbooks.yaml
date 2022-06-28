@@ -4,13 +4,14 @@
 
   vars_files:
     - "{{ ansible_facts['distribution'] }}.yaml"
+
   tasks:
     - name: Installing webserver
       ansible.builtin.apt:
         name: "{{ package_name }}"
         state: present
         update_cache: true
-      when: ansible_facts['distribution'] == "Debian"
+      when: ansible_facts['distribution'] == "Ubuntu"
 
     - name: Copying virtual host configuration
       ansible.builtin.copy:

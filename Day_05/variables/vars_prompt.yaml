@@ -1,6 +1,10 @@
 ---
 - hosts: all
   gather_facts: false
+
+  vars:
+    username: king
+
   vars_prompt:
 
     - name: username
@@ -14,3 +18,5 @@
     - name: Print a message
       ansible.builtin.debug:
         msg: 'Logging in as {{ username }}'
+      vars:
+        username: task_level

@@ -32,4 +32,4 @@
     - name: Finding root user
       ansible.builtin.debug:
         msg: "Yes, root is here."
-      when: cmd_result.stdout.find('root') != 1 or cmd_result.stdout.find('/root') != 1
+      when: cmd_result.stdout.find('root') != -1 or cmd_result.stdout.find('/root') != -1

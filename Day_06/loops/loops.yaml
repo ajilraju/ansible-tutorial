@@ -27,13 +27,13 @@
         - testuser1
         - testuser2
 
-    - name: Tracking progress
-      ansible.builtin.debug:
-        msg: "Loop index {{ idx }} and item {{ item }}"
-      loop:
-        - file1
-        - file2
-        - file3
-        - file4
-      loop_control:
-        index_var: idx
+    # - name: Tracking progress
+    #   ansible.builtin.debug:
+    #     msg: "Loop index {{ idx }} and item {{ item }}"
+    #   loop:
+    #     - file1
+    #     - file2
+    #     - file3
+    #     - file4
+    #   loop_control:
+    #     index_var: idx
