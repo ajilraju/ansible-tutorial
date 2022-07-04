@@ -1,0 +1,43 @@
+---
+- 
+  hosts: all
+  become: true
+  gather_facts: false
+
+  vars_files:
+    - variables.yaml
+
+  tasks:
+    - name: "Installing apache2 webserver"
+      ansible.builtin.apt:
+        name: apache2
+        state: present
+        update_cache: yes
+
+    - name: Copy apache2 configuration file
+      ansible.builtin.template:
+        src: templates/apache2.conf.j2
+        dest: "{{ config_dest }}"
+      notify: Restart apache2
+
+    - name: Enable the Apache2 module rewrite
+      community.general.apache2_module:
+        state: present
+        name: rewrite
+      notify: Restart apache2
+
+    - name: Copy index.html file
+      ansible.builtin.template:
+        src: templates/index.html.j2
+        dest: "{{ web_dest }}/index.html"
+        mode: 0664
+
+    - name: web server address
+      ansible.builtin.debug:
+        msg: "{{ ansible_host }}"
+
+  handlers:
+    - name: Restart apache2
+      ansible.builtin.service:
+        name: apache2
+        state: restarted
