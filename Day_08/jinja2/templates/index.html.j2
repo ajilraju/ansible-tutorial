@@ -13,12 +13,12 @@
         </ol>
         <h2>My shopping list(Jinja2 helped)</h2>
         <ol>
-            {% for f in fruits2 %}
+            {%- for f in fruits2 %}
             <li>{{ f.capitalize() }}</li>
-            {% endfor %}
+            {%- endfor %}
         </ol>
-        {% if 'apple' in fruits2 %}
+        {%- if 'apple' in fruits2 %}
         <img src="https://cdn.britannica.com/60/5760-004-FDD0E2AB/Apples.jpg" width="330" height="250">
-        {% endif %}
+        {% endif -%}
     </body>
 </html>
