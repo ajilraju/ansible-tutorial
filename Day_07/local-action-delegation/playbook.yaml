@@ -1,0 +1,15 @@
+---
+- hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: configuring webserver
+      ansible.builtin.debug:
+        msg: "configuring webserver..."
+
+    - name: Checking webserver working
+      ansible.builtin.shell: "curl {{ ansible_host }} > /tmp/result"
+      delegate_to: 127.0.0.1
+
+    - name: Checking webserver working *local_action*
+      local_action: ansible.builtin.shell curl {{ ansible_host }} > /tmp/result-local_action

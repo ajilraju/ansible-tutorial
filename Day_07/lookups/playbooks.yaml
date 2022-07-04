@@ -1,0 +1,18 @@
+---
+- hosts: all
+  gather_facts: false
+
+  vars:
+    big_file: "{{ lookup('file', 'dummy_files.txt') }}"
+
+  tasks:
+    - name: Creating big file
+      ansible.builtin.copy:
+        dest: /tmp/big-file2
+        content: "{{ big_file }}"
+        mode: 0666
+
+    - name: loop through lookup
+      ansible.builtin.debug:
+        msg: "Lookup value: {{ item }}"
+      loop: "{{ lookup('sequence', 'start=1 end=5', wantlist=True) }}"
