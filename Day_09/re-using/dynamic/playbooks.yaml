@@ -1,0 +1,29 @@
+---
+- hosts: all
+  become: true
+  gather_facts: false
+
+  handlers:
+    - name: Restart service
+      include_tasks: handlers.yaml
+
+  tasks:
+    - name: Installing apache2
+      ansible.builtin.apt:
+        name: apt
+        state: present
+        update_cache: true
+      changed_when: true
+      notify: Restart service
+
+    - name: Installing redis server
+      ansible.builtin.apt:
+        name: redis-server
+        state: present
+        update_cache: true
+      changed_when: true
+      notify: Restart service
+
+    - name: More files
+      ansible.builtin.include_tasks: files.yaml
+      with_sequence: start=1 end=4

@@ -1,0 +1,13 @@
+---
+- name: Restart apache2
+  ansible.builtin.service:
+    name: apache2
+    state: restarted
+  listen: Restart web server
+
+- name: Restart httpd - CentOS
+  ansible.builtin.service:
+    name: httpd
+    state: restarted
+  when: ansible_facts['distribution'] == 'CentOS'
+  listen: Restart web server
