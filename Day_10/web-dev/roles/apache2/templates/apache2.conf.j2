@@ -1,0 +1,15 @@
+<VirtualHost *:{{ http_port | default(80) }}>
+
+	ServerAdmin {{ admin_email }}
+	DocumentRoot {{ web_dest }}
+
+	<Directory "{{ web_dest }}">
+			Options Indexes FollowSymLinks MultiViews
+			AllowOverride All
+			Order allow,deny
+			allow from all
+	</Directory>
+
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>

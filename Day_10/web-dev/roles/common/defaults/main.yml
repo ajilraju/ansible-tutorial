@@ -1,0 +1,7 @@
+---
+common_packages:
+  - net-tools
+  - vim
+  - curl
+  - wget
+  - git

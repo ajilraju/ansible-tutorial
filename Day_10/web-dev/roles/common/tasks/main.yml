@@ -1,0 +1,7 @@
+---
+- name: Installing common dev tools
+  ansible.builtin.apt:
+    name: "{{ common_packages }}"
+    state: latest
+    update_cache: true
+
