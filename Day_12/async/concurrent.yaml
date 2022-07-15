@@ -1,0 +1,19 @@
+---
+- hosts: all
+  gather_facts: false
+
+  tasks:
+  - name: Simulate long running op, allow to run for 20 sec, fire and forget
+    ansible.builtin.command: /bin/sleep 20
+    async: 45
+    poll: 2
+
+  - name: Simulate long running op, allow to run for 5 sec, fire and forget
+    ansible.builtin.command: /bin/sleep 15
+    async: 5
+    poll: 0
+
+  - name: Simulate long running op, allow to run for 5 sec, fire and forget
+    ansible.builtin.command: /bin/sleep 15
+    async: 20
+    poll: 0
