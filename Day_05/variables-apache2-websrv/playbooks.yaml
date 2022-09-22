@@ -1,0 +1,35 @@
+---
+- hosts: all
+  become: true
+  gather_facts: false
+
+  vars:
+    http_package: apache2
+    config_file: /etc/apache2/sites-enabled/000-default.conf
+    webpage: /var/www/html/index.html
+
+  tasks:
+    - name: Installing Apache2 webserver
+      ansible.builtin.apt:
+        name: "{{ http_package }}"
+        state: present
+        update_cache: true
+
+    - name: Copying virtual host configuration
+      ansible.builtin.copy:
+        src: v_hosts.conf
+        dest: "{{ config_file }}"
+        mode: 0644
+      notify: Restarted Apache2
+
+    - name: Copying webpage - index.html
+      ansible.builtin.copy:
+        src: index.html
+        dest: "{{ webpage }}"
+        mode: 0444
+
+  handlers:
+    - name: Restarted Apache2
+      ansible.builtin.service:
+        name: apache2
+        state: restarted
