@@ -1,12 +1,9 @@
 ---
 - hosts: all
   become: true
-  gather_facts: false
 
-  vars:
-    http_package: apache2
-    config_file: /etc/apache2/sites-enabled/000-default.conf
-    webpage: /var/www/html/index.html
+  vars_files:
+    - "{{ ansible_facts['distribution'] }}.yaml"
 
   tasks:
     - name: Installing Apache2 webserver

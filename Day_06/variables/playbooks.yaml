@@ -1,5 +1,6 @@
 ---
 - hosts: all
+  gather_facts: false
 
   vars:
     greetings: Hello
@@ -27,11 +28,12 @@
     # tasks level variables
     - name: Task level variable
       ansible.builtin.debug:
-        msg: "{{ may_fly }}"
+        msg: "{{ greetings }}"
       vars:
-        may_fly: Hi I'm from tasks level
+        greetings: Hi I'm from tasks level
 
     # variables from ansible facts
     - name: Getting Ansible facts
       ansible.builtin.debug:
         msg: "{{ ansible_facts['eth0']['ipv4']['address'] }} <=> {{ ansible_facts.eth0.ipv4.address }}"
+
