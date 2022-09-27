@@ -3,6 +3,13 @@
   gather_facts: false
   become: true
 
+  vars:
+    more_files:
+      - name: myfile.py
+        mode: 666
+      - name: myfile.c
+        mode: 444
+
   tasks:
     - name: Simple loops
       ansible.builtin.debug:
@@ -27,13 +34,20 @@
         - testuser1
         - testuser2
 
-    # - name: Tracking progress
-    #   ansible.builtin.debug:
-    #     msg: "Loop index {{ idx }} and item {{ item }}"
-    #   loop:
-    #     - file1
-    #     - file2
-    #     - file3
-    #     - file4
-    #   loop_control:
-    #     index_var: idx
+    - name: Tracking progress
+      ansible.builtin.debug:
+        msg: "Loop index {{ idx }} and item {{ item }}"
+      loop:
+        - file1
+        - file2
+        - file3
+        - file4
+      loop_control:
+        index_var: idx
+
+    - name: Iterating over a list of hashes
+      ansible.builtin.file:
+        dest: "/tmp/{{ item.name }}"
+        mode: "{{ item.mode }}"
+        state: touch
+      loop: "{{ more_files }}"
