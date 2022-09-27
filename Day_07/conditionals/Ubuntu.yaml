@@ -1,0 +1,4 @@
+---
+http_config: '/etc/apache2/sites-enabled/000-default.conf'
+package_name: apache2
+doc_root: /var/www/html/index.html
