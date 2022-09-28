@@ -4,6 +4,11 @@
   become: true
 
   vars:
+    list_ele:
+      - list_element1
+      - list_element2
+      - list_element3
+
     more_files:
       - name: myfile.py
         mode: 666
@@ -14,10 +19,8 @@
     - name: Simple loops
       ansible.builtin.debug:
         msg: "Elements --> {{ item }}"
-      loop:
-        - list_element1
-        - list_element2
-        - list_element3
+      loop: "{{ list_ele }}"
+
 
     - name: file creation
       ansible.builtin.copy:
