@@ -11,7 +11,7 @@
 
 - name: Printing variable from default or roles variable
   ansible.builtin.debug:
-    msg: "Printing variables {{ demo_variable }}"
+    msg: "Printing variables --> {{ demo_variable }}"
 
 - name: Copying template files
   ansible.builtin.template:
