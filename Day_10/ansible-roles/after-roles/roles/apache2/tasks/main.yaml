@@ -1,0 +1,25 @@
+---
+- name: "Installing apache2 webserver"
+  ansible.builtin.apt:
+    name: apache2
+    state: present
+    update_cache: true
+
+- name: Copy apache2 configuration file
+  ansible.builtin.template:
+    src: templates/apache2.conf.j2
+    dest: "{{ config_dest }}"
+    mode: 0755
+  notify: Restart apache2
+
+- name: Enable the Apache2 module rewrite
+  community.general.apache2_module:
+    state: present
+    name: rewrite
+  notify: Restart apache2
+
+- name: Copy index.html file
+  ansible.builtin.copy:
+    src: files/index.html
+    dest: "{{ web_dest }}/index.html"
+    mode: 0664
