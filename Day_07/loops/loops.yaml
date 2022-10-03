@@ -4,53 +4,58 @@
   become: true
 
   vars:
-    list_ele:
-      - list_element1
-      - list_element2
-      - list_element3
+    # list_ele:
+    #   - list_element1
+    #   - list_element2
+    #   - list_element3
 
     more_files:
       - name: myfile.py
         mode: 666
+        ownership: nobody
+        
       - name: myfile.c
         mode: 444
 
+
   tasks:
-    - name: Simple loops
-      ansible.builtin.debug:
-        msg: "Elements --> {{ item }}"
-      loop: "{{ list_ele }}"
+
+    # - name: Simple loops
+    #   ansible.builtin.debug:
+    #     msg: "Elements --> {{ item }}"
+    #   loop: "{{ list_ele }}"
 
 
-    - name: file creation
-      ansible.builtin.copy:
-        dest: "/tmp/{{ item }}"
-        content: "{{ item }} content"
-        mode: 0666
-      loop: "{{ ['file1', ['new_file1', 'new_file2'], 'hello.py'] | flatten(1) }}"
+    # - name: file creation
+    #   ansible.builtin.copy:
+    #     dest: "/tmp/{{ item }}"
+    #     content: "{{ item }} content"
+    #     mode: 0666
+    #   loop: "{{ ['file1', ['new_file1', 'new_file2'], 'hello.py'] | flatten(1) }}"
 
-    - name: Add several users
-      ansible.builtin.user:
-        name: "{{ item }}"
-        state: present
-      loop:
-        - testuser1
-        - testuser2
+    # - name: Add several users
+    #   ansible.builtin.user:
+    #     name: "{{ item }}"
+    #     state: present
+    #   loop:
+    #     - testuser1
+    #     - testuser2
 
-    - name: Tracking progress
-      ansible.builtin.debug:
-        msg: "Loop index {{ idx }} and item {{ item }}"
-      loop:
-        - file1
-        - file2
-        - file3
-        - file4
-      loop_control:
-        index_var: idx
+    # - name: Tracking progress
+    #   ansible.builtin.debug:
+    #     msg: "Loop index {{ idx }} and item {{ item }}"
+    #   loop:
+    #     - file1
+    #     - file2
+    #     - file3
+    #     - file4
+    #   loop_control:
+    #     index_var: idx
 
     - name: Iterating over a list of hashes
       ansible.builtin.file:
         dest: "/tmp/{{ item.name }}"
         mode: "{{ item.mode }}"
+        owner: "{{ item.ownership | default(omit) }}"
         state: touch
       loop: "{{ more_files }}"

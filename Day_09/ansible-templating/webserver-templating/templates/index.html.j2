@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<head>
+    <title>Ansible Demo</title>
+    <style>
+        h3 {
+            color: white;
+        }
+        div {
+            background-color: rgb(10 29 42);
+        }
+    </style>
+</head>
+<body style="background-color: rgb(83 184 172);">
+    <h2>Hello, Deployed by Ansible and Jinja2 on <i style="color: {{ color }};">{{ now() }}</i></h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dapibus libero
+    libero, a mattis libero luctus ac. Pellentesque consectetur scelerisque quam at laoreet. 
+    Nam et purus pellentesque, cursus eros sed, feugiat orci. In tempor magna sit amet est volutpat, 
+    at tempor mi aliquam. Duis sed aliquet quam. Sed nisi mauris, rhoncus a velit ut, imperdiet tempus 
+    velit. Sed eget ipsum lacus. Donec vitae posuere nisl. Duis id metus feugiat, dictum libero sit 
+    amet, auctor dolor. Nulla ornare ornare turpis quis tincidunt. Pellentesque eget sem augue. 
+    Nulla rutrum ultrices sodales. Aliquam eget tortor felis. Integer elementum sagittis gravida.</p>
+    <div>
+        <h3>{{ 'ansible' | to_uuid }}</h3>
+        <h3>{{ 'Trollhättan his/he and:char' | urlencode }}</h3>
+        <h3>Generated random number: {{ 1000 | random }}</h3>
+        <h3>passwordsaresecret to {{ 'passwordsaresecret' | password_hash('sha256') }}</h3>
+        <h3>passwordsaresecret to (md5) {{ 'passwordsaresecret' | hash('md5') }}</h3>
+    </div>
+</body>
