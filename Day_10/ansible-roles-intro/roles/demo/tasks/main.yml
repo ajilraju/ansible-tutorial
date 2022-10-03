@@ -1,0 +1,27 @@
+---
+- name: First demo tasks
+  ansible.builtin.debug:
+    msg: "I'm first demo tasks"
+  changed_when: true
+  notify: Running demo handlers
+
+- name: Second demo tasks
+  ansible.builtin.debug:
+    msg: "I'm Second demo tasks"
+
+- name: Printing variable from default or roles variable
+  ansible.builtin.debug:
+    msg: "Printing variables {{ demo_variable }}"
+
+- name: Copying template files
+  ansible.builtin.template:
+    src: demo-template.j2
+    dest: /tmp/demo-template-pasted
+    mode: 666
+
+- name: Copying normal files
+  ansible.builtin.copy:
+    src: demo-file.txt
+    dest: /tmp/demo-file.txt.copied
+    mode: 644
+
