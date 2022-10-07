@@ -1,0 +1,10 @@
+---
+- hosts: all
+  become: true
+
+  roles:
+    - common
+    - apache2
+    - role: ajilraju.nginx
+      vars:
+        http_port: 8080

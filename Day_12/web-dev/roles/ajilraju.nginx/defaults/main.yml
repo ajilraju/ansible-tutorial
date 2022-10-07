@@ -1,0 +1,4 @@
+---
+maintainer: Ajil Raju
+http_port: 8888
+doc_root: /usr/share/nginx/html
