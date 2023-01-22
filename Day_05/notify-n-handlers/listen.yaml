@@ -6,7 +6,10 @@
   tasks:
     - name: Installing Apache2 webserver
       ansible.builtin.apt:
-        name: apache2
+        name:
+          - apache2
+          - memcached
+          - php-fpm
         state: present
         update_cache: true
 
@@ -35,3 +38,10 @@
         name: memcached
         state: restarted
       listen: Restarted web services
+
+    - name: Restarted php-fpm
+      ansible.builtin.service:
+        name: php-fpm
+        state: restarted
+      listen: Restarted web services
+
