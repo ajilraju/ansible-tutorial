@@ -1,0 +1,28 @@
+---
+- hosts: localhost
+  gather_facts: false
+  connection: local
+
+  vars:
+    username: king
+
+  vars_prompt:
+
+    - name: username
+      prompt: What is your username?
+      private: false
+
+    - name: password
+      prompt: What is your password?
+
+  tasks:
+    - name: Print logging info
+      ansible.builtin.debug:
+        msg: 'Logging in as {{ username }}'
+      vars:
+        username: Anonymous
+
+    - name: Print logging info - second
+      ansible.builtin.debug:
+        msg: 'Logging in as {{ username }}'
+      vars:
