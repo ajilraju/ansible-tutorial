@@ -44,4 +44,3 @@
         name: php-fpm
         state: restarted
       listen: Restarted web services
-
