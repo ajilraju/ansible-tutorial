@@ -16,7 +16,7 @@
         src: v_hosts.conf
         dest: /etc/apache2/sites-enabled/000-default.conf
         mode: 0644
-      notify: Restarted web services
+      notify: Restarted Apache2
 
     - name: Flushing handlers
       ansible.builtin.meta: flush_handlers
