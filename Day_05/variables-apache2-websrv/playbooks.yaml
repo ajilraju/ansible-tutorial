@@ -21,7 +21,7 @@
 
     - name: Copying webpage - index.html
       ansible.builtin.copy:
-        src: index.html
+        src: "index.{{ ansible_facts['distribution'] }}.html"
         dest: "{{ webpage }}"
         mode: 0444
 
