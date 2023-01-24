@@ -25,4 +25,4 @@
     - name: Print logging info - second
       ansible.builtin.debug:
         msg: 'Logging in as {{ username }}'
-      vars:
+
