@@ -1,0 +1,5 @@
+---
+- name: Rand files creation
+  ansible.builtin.copy:
+    dest: "/tmp/files-rand-{{ 60 | random }}"
+    content: Just a rand files
