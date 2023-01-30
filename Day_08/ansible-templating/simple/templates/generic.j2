@@ -1,0 +1,12 @@
+Date {{ now() }}
+Greetings {{ greetings | default('Hello world')}}
+Should be Mandatory {{ must | mandatory }}
+Getting datatype {{ myvar | type_debug }}
+Who is max {{ lists | max }}
+Find unique {{ lists | unique }}
+{% for item in lists %}
+   {{ item | upper }}
+{% endfor %}
+{{ "hello world" | length }}
+
+
