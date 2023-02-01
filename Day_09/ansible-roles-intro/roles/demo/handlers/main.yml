@@ -1,4 +1,0 @@
----
-- name: Running demo handlers
-  ansible.builtin.debug:
-    msg: "I'm a demo handlers"
