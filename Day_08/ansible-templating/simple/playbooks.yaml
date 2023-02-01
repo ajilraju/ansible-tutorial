@@ -3,16 +3,19 @@
   gather_facts: false
 
   vars:
-    greetings: Hola
+    greetings: Hello
     must: false
     myvar:
       skills:
         - ansible
         - terraform
     lists:
-      - apple
-      - asdfasd
-      - sdfasd
+      - 11
+      - 123
+      - 11
+      - 234
+
+    variable: hi
 
 
   tasks:
@@ -21,4 +24,3 @@
         src: templates/generic.j2
         dest: /tmp/rendered
         mode: 0644
-
