@@ -27,4 +27,4 @@
 
     - name: More files
       ansible.builtin.include_tasks: files.yaml
-      with_sequence: start=1 end=4
+      with_sequence: start=1 end=3
