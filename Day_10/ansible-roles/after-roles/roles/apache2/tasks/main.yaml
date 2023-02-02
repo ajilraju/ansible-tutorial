@@ -7,7 +7,7 @@
 
 - name: Copy apache2 configuration file
   ansible.builtin.template:
-    src: templates/apache2.conf.j2
+    src: apache2.conf.j2
     dest: "{{ config_dest }}"
     mode: 0755
   notify: Restart apache2
@@ -20,6 +20,6 @@
 
 - name: Copy index.html file
   ansible.builtin.copy:
-    src: files/index.html
+    src: index.html
     dest: "{{ web_dest }}/index.html"
     mode: 0664
