@@ -1,0 +1,22 @@
+---
+- name: User setup
+  hosts: all
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: User creation
+      ansible.builtin.user:
+        name: kevin
+        comment: Developer
+        uid: 5665
+        shell: /bin/bash
+        password: "{{ 'password' | password_hash('sha256') }}"
+
+    - name: Copying README
+      ansible.builtin.copy:
+        owner: kevin
+        group: kevin
+        src: README
+        dest: /home/kevin/
+        mode: "0774"
