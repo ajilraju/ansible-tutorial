@@ -9,6 +9,6 @@
       ansible.builtin.command: cat /etc/passwd
       register: active_users
 
-    - name: printing active users
+    - name: Printing active users
       ansible.builtin.debug:
         var: active_users.stdout_lines[0]
