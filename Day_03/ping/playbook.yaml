@@ -1,0 +1,7 @@
+---
+- name: Ping to host
+  hosts: all
+
+  tasks:
+    - name: Ping module use
+      ansible.builtin.ping:
