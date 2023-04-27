@@ -1,3 +1,3 @@
 http_package: httpd
-config_file: /etc/apache2/sites-enabled/000-default.conf
+config_file: /etc/httpd/httpd.conf
 webpage: /var/www/html/index.html
