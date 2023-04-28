@@ -1,0 +1,56 @@
+---
+- name: Conditionals example
+  hosts: all
+  become: true
+
+  vars_files:
+    - "{{ ansible_facts['distribution'] }}.yaml"
+
+  tasks:
+    - name: Installing Apache2
+      ansible.builtin.apt:
+        name: "{{ package_name }}"
+        state: present
+        update_cache: true
+      when: ansible_facts['distribution'] == "Ubuntu"
+
+    - name: Installing httpd
+      ansible.builtin.yum:
+        name: "{{ package_name }}"
+        state: present
+      when: ansible_facts['distribution'] == "CentOS"
+
+    - name: Copying virtual host configuration
+      ansible.builtin.copy:
+        src: v_hosts.conf
+        dest: "{{ http_config }}"
+        mode: "0644"
+      notify: Restarted Apache2
+      when: ansible_facts['distribution'] == "Ubuntu"
+
+    - name: Copying virtual host configuration
+      ansible.builtin.copy:
+        src: v_hosts.conf
+        dest: "{{ http_config }}"
+        mode: "0644"
+      notify: Restarted Apache2
+      when: ansible_facts['distribution'] == "CentOS"
+
+    - name: Copying webpage - index.html
+      ansible.builtin.copy:
+        src: index.html
+        dest: "{{ doc_root }}"
+        mode: "0444"
+
+  handlers:
+    - name: Restarted Apache2
+      ansible.builtin.service:
+        name: "{{ package_name }}"
+        state: restarted
+      when: ansible_facts['distribution'] == "Ubuntu"
+
+    - name: Restarted httpd
+      ansible.builtin.service:
+        name: "{{ package_name }}"
+        state: restarted
+      when: ansible_facts['distribution'] == "CentOS"

@@ -1,0 +1,76 @@
+---
+- name: Whole loop example
+  hosts: all
+  gather_facts: false
+  become: true
+
+  vars:
+    packages:
+      - apache2
+      - php
+      - mysql
+      - bind9
+
+    user_files:
+      - name: myfile.py
+        mode: 666
+        ownership: nobody
+
+      - name: myfile.c
+        mode: 444
+
+
+  tasks:
+    - name: Simple loops
+      ansible.builtin.debug:
+        msg: "Elements --> {{ item }}"
+      loop: "{{ packages }}"
+
+    - name: Simple loops - with_list
+      ansible.builtin.debug:
+        msg: "Elements --> {{ item }}"
+      with_list:
+        - apache2
+        - php
+        - mysql
+        - php-fpm
+
+    - name: Simple loops - with_fileglob
+      ansible.builtin.debug:
+        msg: " Elements  --> {{ item }}"
+      with_fileglob:
+        - "*.yaml"
+
+    - name: File creation
+      ansible.builtin.copy:
+        dest: "/tmp/{{ item }}"
+        content: "{{ item }} content"
+        mode: 0666
+      loop: "{{ ['file1', ['new_file1', 'new_file2'], 'hello.py'] | flatten(1) }}"
+
+    - name: Add several users
+      ansible.builtin.user:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - testuser1
+        - testuser2
+
+    - name: Tracking progress
+      ansible.builtin.debug:
+        msg: "Loop index {{ idx }} and item {{ item }}"
+      loop:
+        - file1
+        - file2
+        - file3
+        - file4
+      loop_control:
+        index_var: idx
+
+    - name: Iterating over a list of hashes
+      ansible.builtin.file:
+        dest: "/tmp/{{ item.name }}"
+        mode: "{{ item.mode }}"
+        owner: "{{ item.ownership | default(omit) }}"
+        state: touch
+      loop: "{{ user_files }}"

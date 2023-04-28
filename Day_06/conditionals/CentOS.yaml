@@ -1,0 +1,4 @@
+---
+http_config: '/etc/httpd/sites-enabled/httpd.conf'
+package_name: httpd
+doc_root: /var/www/html/index.html
