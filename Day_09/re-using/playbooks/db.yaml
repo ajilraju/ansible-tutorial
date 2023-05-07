@@ -1,0 +1,8 @@
+---
+- hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Installing MySQL server
+      ansible.builtin.command: sleep 5
+      changed_when: true
