@@ -1,0 +1,16 @@
+---
+- name: Ansible Roles intro examples
+  hosts: all
+  gather_facts: false
+
+  roles:
+    - stage
+
+  tasks:
+    - name: Normal task
+      ansible.builtin.debug:
+        msg: "a normal task task"
+  post_tasks:
+    - name: Post task
+      ansible.builtin.debug:
+        msg: "a post task"
