@@ -1,0 +1,19 @@
+---
+- hosts: all
+  become: true
+  gather_facts: false
+
+  vars_files:
+    - variables/apache2.yaml
+
+  handlers:
+    - name: Restart Apache2
+      ansible.builtin.import_tasks: handlers/restart.yaml
+
+  tasks:
+    - name: Apache2 web server deployment
+      ansible.builtin.import_tasks: tasks/apache2.yaml
+
+    - name: web server address
+      ansible.builtin.debug:
+        msg: "{{ ansible_host }}"
