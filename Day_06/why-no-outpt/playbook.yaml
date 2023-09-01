@@ -1,0 +1,14 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: Getting current logged users
+      ansible.builtin.command: w
+
+    - name: Getting current logged users - second
+      ansible.builtin.command: cat /etc/passwd
+      register: active_users
+
+    - name: Printing active users
+      ansible.builtin.debug:
+        var: active_users.stdout_lines[0]

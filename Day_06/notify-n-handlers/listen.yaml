@@ -1,0 +1,46 @@
+---
+- hosts: all
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Installing Apache2 webserver
+      ansible.builtin.apt:
+        name:
+          - apache2
+          - memcached
+          - php-fpm
+        state: present
+        update_cache: true
+
+    - name: Copying virtual host configuration
+      ansible.builtin.copy:
+        src: v_hosts.conf
+        dest: /etc/apache2/sites-enabled/000-default.conf
+        mode: "0644"
+      notify: Restarted web services
+
+    - name: Copying webpage - index.html
+      ansible.builtin.copy:
+        src: index.html
+        dest: /var/www/html/index.html
+        mode: "0444"
+
+  handlers:
+    - name: Restarted Apache2
+      ansible.builtin.service:
+        name: apache2
+        state: restarted
+      listen: Restarted web services
+
+    - name: Restarted memcached
+      ansible.builtin.service:
+        name: memcached
+        state: restarted
+      listen: Restarted web services
+
+    - name: Restarted php-fpm
+      ansible.builtin.service:
+        name: php-fpm
+        state: restarted
+      listen: Restarted web services

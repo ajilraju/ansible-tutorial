@@ -1,0 +1,30 @@
+---
+- hosts: all
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Installing Apache2 webserver
+      ansible.builtin.apt:
+        name: apache2
+        state: present
+        update_cache: true
+
+    - name: Copying virtual host configuration
+      ansible.builtin.copy:
+        src: v_hosts.conf
+        dest: /etc/apache2/sites-enabled/000-default.conf
+        mode: 0644
+        owner: www-data
+        group: www-data
+
+    - name: Restarting apache2
+      ansible.builtin.service:
+        name: apache2
+        state: restarted
+
+    - name: Copying webpage - index.html
+      ansible.builtin.copy:
+        src: index.html
+        dest: /var/www/html/index.html
+        mode: 0644
