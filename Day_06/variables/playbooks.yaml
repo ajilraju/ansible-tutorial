@@ -1,0 +1,39 @@
+---
+- hosts: all
+  gather_facts: true
+
+  vars:
+    greetings: Hello
+    programming:
+      - Python
+      - Java
+      - Rust
+
+  vars_files:
+    - variables.yaml
+
+  tasks:
+    - name: simple variable
+      ansible.builtin.debug:
+        msg: "{{ greetings }} DevOps" # referencing variables with "{{ var_name }}"
+    
+    - name: getting programming from list
+      ansible.builtin.debug:
+        msg:  "I like {{ programming[0] }}."
+
+    - name: getting skills from dict # accessing with 2 different syntax.
+      ansible.builtin.debug:
+        msg:  "My DevOps strength is {{ skills['devops'] }} and coding is {{ skills.coding }}"
+
+    # tasks level variables
+    - name: Task level variable
+      ansible.builtin.debug:
+        msg: "{{ greetings }}"
+      vars:
+        greetings: Hi I'm from tasks level
+
+    # variables from ansible facts
+    - name: Getting Ansible facts
+      ansible.builtin.debug:
+        msg: "{{ ansible_facts['eth0']['ipv4']['address'] }} <=> {{ ansible_facts.eth0.ipv4.address }}"
+
