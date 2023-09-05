@@ -1,0 +1,35 @@
+---
+- hosts: all
+
+  vars:
+    var_status: true
+
+  tasks:
+    - name: Checking AppArmor status
+      ansible.builtin.debug:
+        msg: "Your system is secured."
+      when: ansible_apparmor.status == 'enabled'
+
+    - name: Checking AppArmor status - Another syntax
+      ansible.builtin.debug:
+        msg: "Your system is secured."
+      when: ansible_facts['apparmor']["status"] == 'enabled'
+
+    - name: Conditions based on the variables
+      ansible.builtin.debug:
+        msg: "Value of the variable var_status is {{ var_status }}"
+      when: var_status
+
+    - name: I'm dummy task for the next task
+      ansible.builtin.command: cat /etc/passwd
+      register: cmd_result
+
+    - name: Previous command is success or not
+      ansible.builtin.debug:
+        msg: "Yes, It's worked."
+      when: cmd_result.rc == 0
+
+    - name: Finding root user
+      ansible.builtin.debug:
+        msg: "Yes, root is here."
+      when: cmd_result.stdout.find('root') != -1 or cmd_result.stdout.find('/root') != -1

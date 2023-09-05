@@ -1,0 +1,9 @@
+---
+- hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Loop example
+      ansible.builtin.debug:
+        var: item
+      loop: "{{ lookup('fileglob', '*.yaml', wantlist=True) }}"

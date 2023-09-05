@@ -1,0 +1,17 @@
+---
+- name: Facts
+  hosts: all
+
+  pre_tasks:
+    - name: Set Custom Fact
+      ansible.builtin.set_fact:
+        my_custom_fact: "This is a custom fact value"
+
+  tasks:
+    - name: Set Custom Fact
+      ansible.builtin.debug:
+        var: my_custom_fact
+
+    - name: Getting ansible facts
+      ansible.builtin.debug:
+        msg: "{{ ansible_facts['distribution'], ansible_facts['kernel'], ansible_facts['processor'][-1] }}"

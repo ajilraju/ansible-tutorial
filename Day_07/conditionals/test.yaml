@@ -1,0 +1,13 @@
+---
+- hosts: mnode
+
+  gather_facts: false
+
+  vars:
+    number: -10
+
+  tasks:
+    - name: Positive
+      ansible.builtin.debug:
+        msg: "Number {{ number }} is positive"
+      when: not number > 0
