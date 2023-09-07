@@ -1,0 +1,18 @@
+---
+admin_email: webmaster@localhost
+config_dest: /etc/apache2/sites-enabled/000-default.conf 
+web_dest: /var/www/html
+http_port: 80
+color: red
+ip_addr:
+  - 192.168.1.10/255.255.253.100
+  - 10.10.10.1/255.255.255.0
+
+list_ele:
+  - 2
+  - 2
+  - 10
+  - 5
+  - 2
+  - 1
+  - 7
