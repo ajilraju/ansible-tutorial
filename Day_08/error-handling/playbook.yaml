@@ -1,0 +1,27 @@
+---
+- name: Error handling
+  hosts: all
+  gather_facts: false
+  ignore_unreachable: true
+
+  tasks:
+    - name: Forcing errors
+      ansible.builtin.command: /bin/false
+      ignore_errors: true
+
+    - name: Defining failure
+      ansible.builtin.command: /bin/false
+      register: command
+      failed_when: command.rc != 1
+      changed_when: false
+
+    - name: Defining changes
+      ansible.builtin.command: ls -l
+      register: command
+      changed_when: command.rc != 0
+
+    - name: Defining failure - second
+      ansible.builtin.command: cat /etc/passwd
+      register: result
+      changed_when: false
+      failed_when: "'root' not in result.stdout"
