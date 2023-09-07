@@ -1,0 +1,4 @@
+{# /etc/hosts dynamic construction #}
+
+{{ ansible_facts['default_ipv4']['address'] }} {{ ansible_facts['fqdn'] }}
+

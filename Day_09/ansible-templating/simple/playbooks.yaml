@@ -1,0 +1,46 @@
+---
+- name: Ansible - Jinja2 examples
+  hosts: all
+  become: true
+  vars:
+    greetings: Hello
+    must: false
+    myvar:
+      skills:
+        - ansible
+        - terraform
+    lists:
+      - 11
+      - 123
+      - 11
+      - 234
+
+    variable: hi
+
+    resolv_info:
+      namesrv:
+        - ns1.example.com
+        - ns2.example.com
+        - ns3.example.com
+      domain: example.com
+      opts: "edns0 trust-ad"
+
+
+  tasks:
+    - name: Rendering template
+      ansible.builtin.template:
+        src: templates/generic.j2
+        dest: /tmp/rendered
+        mode: "0644"
+
+    - name: Copying /etc/hosts file
+      ansible.builtin.template:
+        src: templates/hosts.j2
+        dest: /etc/hosts.dummy
+        mode: "0644"
+
+    - name: Copying /etc/resolv.conf file
+      ansible.builtin.template:
+        src: templates/resolv.j2
+        dest: /etc/resolv.conf.dummy
+        mode: "0644"

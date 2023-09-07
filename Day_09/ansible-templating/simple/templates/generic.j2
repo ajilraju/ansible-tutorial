@@ -1,0 +1,32 @@
+Current date = {{ now() }}
+
+Greetings {{ greetings | default('Hello world') }}
+
+Should be Mandatory {{ must | mandatory }}
+
+Getting datatype {{ myvar | type_debug }}
+
+Who is max {{ lists | max }}
+
+Find unique {{ lists | unique }}
+
+{% for item in lists %}
+   {{ item | upper }}
+{% endfor %}
+{{ "hello world" | length }}
+
+
+{# comment #}
+static content {{ variable }}
+
+{% if variable is defined %}
+variable is def
+{% else %}
+variable is not defined
+{% endif %}
+
+{% for i in [1, 2, 3] %}
+{{ i }}
+{% endfor %}
+
+{{ variable | upper() }}
