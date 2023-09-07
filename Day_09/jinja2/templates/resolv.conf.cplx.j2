@@ -1,0 +1,12 @@
+# sample /etc/resolv.conf.
+
+{% if namesrv is not defined %}
+nameserver 8.8.8.8
+{% else %}
+{% for ns in namesrv -%}
+nameserver {{ ns }}
+{% endfor %}
+{% endif -%}
+
+options {{ opts }}
+search {{ domain | default('.')}}
