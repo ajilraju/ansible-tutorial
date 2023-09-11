@@ -1,0 +1,12 @@
+---
+- name: Restart Apache2
+  ansible.builtin.service:
+    name: apache2
+    state: restarted
+  when: ansible_facts['distribution'] == 'Ubuntu'
+
+- name: Restart httpd - CentOS
+  ansible.builtin.service:
+    name: httpd
+    state: restarted
+  when: ansible_facts['distribution'] == 'CentOS'
