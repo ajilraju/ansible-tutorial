@@ -1,0 +1,17 @@
+---
+- name: Printing variable from default or roles variable
+  ansible.builtin.debug:
+    msg: "{{ greetings }}... Ansible!!!"
+
+- name: First demo tasks
+  ansible.builtin.debug:
+    msg: "I'm first demo tasks"
+  changed_when: true
+  notify: Running demo handlers
+
+- name: Second demo tasks
+  ansible.builtin.debug:
+    msg: "I'm Second demo tasks"
+
+- name: Importing Non-main tasks
+  ansible.builtin.import_tasks: copy.yaml
