@@ -1,0 +1,13 @@
+---
+- hosts: 127.0.0.1
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: getting UID and GID
+      id:
+        name: root
+      register: id_details
+    
+    - name: Print UID and GID
+      ansible.builtin.debug: var=id_details

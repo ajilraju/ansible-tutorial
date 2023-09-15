@@ -1,0 +1,17 @@
+---
+- hosts: 127.0.0.1
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: Long command (1)
+      ansible.builtin.command: sleep 10
+      changed_when: false
+
+    - name: Long command (2)
+      ansible.builtin.command: sleep 10
+      changed_when: false
+
+    - name: Long command (3)
+      ansible.builtin.command: sleep 5
+      changed_when: false

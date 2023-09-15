@@ -1,0 +1,22 @@
+---
+- hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Long running task - 1
+      ansible.builtin.command: sleep 15
+      changed_when: false
+      async: 16 
+      poll: 0 # Fire and Forget 
+
+    - name: Long running task - 1
+      ansible.builtin.command: sleep 15
+      changed_when: false
+      async: 20  # Maximum time for the task to run in seconds
+      poll: 10     # Check the task status every 10 seconds
+
+    - name: Long running task - 1
+      ansible.builtin.command: sleep 15
+      changed_when: false
+      async: 16
+      poll: 0

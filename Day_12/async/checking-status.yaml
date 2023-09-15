@@ -1,0 +1,19 @@
+---
+- hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Long running task - 1
+      ansible.builtin.command: ping localhost
+      changed_when: false
+      async: 20
+      poll: 0 # Fire and Forget
+      register: sleeping
+
+    - name: Checking the Job Status running in background
+      ansible.builtin.async_status:
+        jid: "{{ sleeping.ansible_job_id }}"
+      register: job_result
+      until: job_result.finished # Retry within limit until the job status changed to "finished": 1
+      retries: 50 # Maximum number of retries to check job status
+      delay: 2
